@@ -13,13 +13,6 @@
             "Callisto\\": "src"
         }
     },
-    "require": {
-        "php": "^7.1"
-    },
-    "config": {
-        "bin-compat": "full",
-        "platform": {
-            "php": "7.1"
-        }
-    }
+    "require": {},
+    "minimum-stability":"dev"
 }
