@@ -1,0 +1,25 @@
+{
+    "name": "ktamashun/callisto",
+    "description": "PHP library for the Twitter Streaming API",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ktamashun",
+            "email": "kovacs.tamas.hun@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Callisto\\": "src"
+        }
+    },
+    "require": {
+        "php": "^7.1"
+    },
+    "config": {
+        "bin-compat": "full",
+        "platform": {
+            "php": "7.1"
+        }
+    }
+}
