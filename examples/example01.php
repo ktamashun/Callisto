@@ -6,4 +6,5 @@
  * Time: 22:38
  */
 
-require_once '../vendor/autoload.php';
+echo 'cuccka'.PHP_EOL;
+//require_once '../vendor/autoload.php';
