@@ -1,5 +1,7 @@
 <?php
 
+namespace Callisto;
+
 /**
  * Created by PhpStorm.
  * User: tamaskovacs
