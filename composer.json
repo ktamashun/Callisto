@@ -14,7 +14,11 @@
         }
     },
     "require": {
-        "guzzlehttp/guzzle": "^6.2"
+        "psr/log": "1.0.2",
+        "monolog/monolog": "1.22.0"
     },
-    "minimum-stability":"dev"
+    "minimum-stability":"dev",
+    "require-dev": {
+        "vimeo/psalm": "dev-master"
+    }
 }

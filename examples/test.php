@@ -2,11 +2,11 @@
 
 include __DIR__ . '/../vendor/autoload.php';
 
-
 $consumerKey = 'xWp3LhsRcO7wYyFeveniIACLp';
 $consumerSecret = 'Y0uv4hXkba45ajOM2WFzxJmBV7hiyZc1kBSC8KOq0UpOlnebHr';
 $accessTokenSecret = 'lJvuqqtYJLyvfr73GQmiyfqEAstxxLbnOXkK1ZSEXWPZc';
 $accessToken = '27311622-mjbZEeMlGD9lv8OedufCCAMg9qUUVI1dgHNl5734B';
+
 
 $http_method = 'POST';
 $base_url = 'https://stream.twitter.com/1.1/statuses/filter.json';
@@ -14,15 +14,13 @@ $track = 'twitter';
 
 $params = [
 	'track' => $track,
-	//'include_entities' => 'true',
 	'oauth_consumer_key' => $consumerKey,
-	'oauth_nonce' => md5(rand()),
+	'oauth_nonce' => 'cc8b0762b0c7194d7938be5d41ec2012', //md5(rand()),
 	'oauth_signature_method' => 'HMAC-SHA1',
-	'oauth_timestamp' => mktime(),
+	'oauth_timestamp' => '1484414234', //mktime(),
 	'oauth_token' => $accessToken,
 	'oauth_version' => '1.0',
 ];
-
 
 /*
 $consumerKey = 'xvz1evFS4wEEPTGEFPHBog';
@@ -44,8 +42,6 @@ $params = [
 ];
 */
 
-
-
 $urlParams = [];
 foreach ($params as $key => $value) {
 	$params[$key] = rawurlencode($value);
@@ -62,7 +58,6 @@ $signingKey = rawurlencode($consumerSecret) . '&' . rawurlencode($accessTokenSec
 $oauthSignature = base64_encode(hash_hmac('sha1', $signatureBaseString, $signingKey, true));
 
 
-$res = fsockopen('ssl://stream.twitter.com', 443);
 $str = "POST /1.1/statuses/filter.json HTTP/1.1\r\n"
     ."Accept: */*\r\n"
 	."Connection: close\r\n"
@@ -80,10 +75,26 @@ $str = "POST /1.1/statuses/filter.json HTTP/1.1\r\n"
 	."track=".$track
 ;
 
+echo $str . PHP_EOL; return;
 
-echo $str . PHP_EOL;
+$res = fsockopen('ssl://stream.twitter.com', 443);
 stream_set_blocking($res, 1);
 fwrite($res, $str, strlen($str));
+
+
+while (true && !feof($res)) {
+	$line = fgets($res, 1024);
+	if (empty($line)) {
+		continue;
+	}
+
+	echo $line;
+}
+return;
+
+
+
+
 while ($line = trim(fgets($res, 1024))) {
 	echo $line.'====================='.PHP_EOL;
 	echo json_decode($line);
@@ -121,5 +132,3 @@ while (true && !feof($res)) {
 }
 return;
 
-$connection = new Callisto\StreamConnection("xWp3LhsRcO7wYyFeveniIACLp", "27311622-mjbZEeMlGD9lv8OedufCCAMg9qUUVI1dgHNl5734B");
-$connection->connect();
