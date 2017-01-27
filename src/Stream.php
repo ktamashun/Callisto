@@ -209,7 +209,6 @@ class Stream extends Psr7Stream
 					$this->handleMessage($status);
 				} else {
 					yield $status;
-					//$this->enqueueStatus($status);
 				}
 
 				$status = '';

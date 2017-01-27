@@ -33,7 +33,7 @@ class Logger extends AbstractLogger
 		}, $context);
 
 		$dateTime = new \DateTime();
-		$contextStr = ' ["' . implode('"],["', $context) . ']"';
+		$contextStr = ' ["' . implode('","', $context) . ']"';
 
 		echo '[' . $dateTime->format('Y-m-d H:i:s') . '] Callisto.' . $level . ': ' . $message . $contextStr . PHP_EOL;
 	}
