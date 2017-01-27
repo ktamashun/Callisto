@@ -12,7 +12,7 @@ $accessToken = '27311622-mjbZEeMlGD9lv8OedufCCAMg9qUUVI1dgHNl5734B';
 
 class myFilter extends Callisto\Stream\Filter
 {
-	public function enqueueStatus($jsonStatus)
+	public function enqueueStatus(string $jsonStatus)
 	{
 		$status = json_decode($jsonStatus);
 
@@ -32,7 +32,7 @@ $stream->setLogger($logger);
 $stream->setFilters(
 	[
 		new Callisto\Filter\Track(['twitter']),
-		//new Callisto\Filter\Language(['en', 'de']),
+		new Callisto\Filter\Language(['en', 'de']),
 		//new Callisto\Filter\Follow(['123456789', '987654321']),
 		//new Callisto\Filter\Location(10.1101, 12.001, 30.223, 35.443),
 	]

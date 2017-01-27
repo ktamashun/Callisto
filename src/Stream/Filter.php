@@ -40,7 +40,7 @@ abstract class Filter extends BaseStream
 	/**
 	 * @return array
 	 */
-	protected function getParams()
+	protected function getParams() : array
 	{
 		$return = [];
 
