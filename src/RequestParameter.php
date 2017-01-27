@@ -13,7 +13,7 @@ namespace Callisto;
  * Class BaseFilter
  * @package Callisto
  */
-abstract class BaseFilter
+abstract class RequestParameter
 {
 	/**
 	 * @var string

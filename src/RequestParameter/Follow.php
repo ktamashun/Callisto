@@ -3,12 +3,12 @@
  * @author: kovacs.tamas.hun@gmail.com
  */
 
-namespace Callisto\Filter;
+namespace Callisto\RequestParameter;
 
-use Callisto\BaseFilter;
+use Callisto\RequestParameter;
 
 
-class Follow extends BaseFilter
+class Follow extends RequestParameter
 {
 	/**
 	 * @var string

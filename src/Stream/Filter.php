@@ -5,15 +5,15 @@
 
 namespace Callisto\Stream;
 
-use Callisto\BaseFilter;
-use Callisto\BaseStream;
+use Callisto\RequestParameter;
+use Callisto\Stream;
 
 
 /**
  * Class Stream
  * @package Callisto
  */
-abstract class Filter extends BaseStream
+class Filter extends Stream
 {
 	/**
 	 * Streaming endpoint.
@@ -25,9 +25,9 @@ abstract class Filter extends BaseStream
 	/**
 	 * Parameters to use to filter the statuses.
 	 *
-	 * @var \Callisto\BaseFilter[]
+	 * @var \Callisto\RequestParameter[]
 	 */
-	protected $filters = [];
+	protected $requestParameters = [];
 
 	/**
 	 * Http method to use when connecting to the streaming API.
@@ -44,7 +44,7 @@ abstract class Filter extends BaseStream
 	{
 		$return = [];
 
-		foreach ($this->filters as $filter) {
+		foreach ($this->requestParameters as $filter) {
 			$return[$filter->getKey()] = $filter->getValue();
 		}
 
@@ -54,12 +54,12 @@ abstract class Filter extends BaseStream
 	/**
 	 * Sets the filters to use in the request.
 	 *
-	 * @param BaseFilter[] $filters
+	 * @param RequestParameter[] $requestParameters
 	 * @return $this Fluent interface.
 	 */
-	public function setFilters($filters)
+	public function setRequestParameters($requestParameters)
 	{
-		$this->filters = $filters;
+		$this->requestParameters = $requestParameters;
 		return $this;
 	}
 }

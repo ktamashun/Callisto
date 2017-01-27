@@ -3,12 +3,12 @@
  * @author: kovacs.tamas.hun@gmail.com
  */
 
-namespace Callisto\Filter;
+namespace Callisto\RequestParameter;
 
-use Callisto\BaseFilter;
+use Callisto\RequestParameter;
 
 
-class Language extends BaseFilter
+class Language extends RequestParameter
 {
 	/**
 	 * @var string
