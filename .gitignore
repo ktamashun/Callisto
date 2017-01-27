@@ -1,3 +1,4 @@
 /vendor/
 /.idea
 /examples/*.log
+/examples/env.local.php
