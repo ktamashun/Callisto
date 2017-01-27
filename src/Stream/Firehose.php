@@ -21,27 +21,4 @@ class Firehose extends Stream
 	 * @var string
 	 */
 	protected $endpoint = '/1.1/statuses/firehose.json';
-
-	/**
-	 * Parameters to use to filter the statuses.
-	 *
-	 * @var \Callisto\RequestParameter[]
-	 */
-	protected $requestParameters = [];
-
-	/**
-	 * Http method to use when connecting to the streaming API.
-	 *
-	 * @var string
-	 */
-	protected $httpMethod = 'GET';
-
-
-	/**
-	 * @return array
-	 */
-	protected function getParams() : array
-	{
-		return [];
-	}
 }
