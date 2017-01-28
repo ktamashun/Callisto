@@ -44,9 +44,13 @@ class Stream extends Psr7Stream
 	 */
 	protected $logger;
 
+	/**
+	 * Parameters to use to filter the statuses.
+	 *
+	 * @var \Callisto\RequestParameter[]
+	 */
+	protected $requestParameters = [];
 
-	public function enqueueStatus(string $jsonStatus)
-	{}
 
 	/**
 	 * Stream constructor.
@@ -102,13 +106,33 @@ class Stream extends Psr7Stream
 	}
 
 	/**
-	 * Returns the request parameters.
+	 * Returns the parameters to use in the request.
 	 *
 	 * @return array
 	 */
 	protected function getParams() : array
 	{
-		return [];
+		$return = [
+			'stall_warnings' => 'true'
+		];
+
+		foreach ($this->requestParameters as $filter) {
+			$return[$filter->getKey()] = $filter->getValue();
+		}
+
+		return $return;
+	}
+
+	/**
+	 * Sets the filters to use in the request.
+	 *
+	 * @param RequestParameter[] $requestParameters
+	 * @return $this Fluent interface.
+	 */
+	public function setRequestParameters($requestParameters)
+	{
+		$this->requestParameters = $requestParameters;
+		return $this;
 	}
 
 	/**
@@ -215,4 +239,4 @@ class Stream extends Psr7Stream
 			}
 		}
 	}
- }
+}

@@ -8,10 +8,15 @@ namespace Callisto\RequestParameter;
 use Callisto\RequestParameter;
 
 
-class Follow extends RequestParameter
+class FilterLevel extends RequestParameter
 {
+	const NONE = 'none';
+	const LOW = 'low';
+	const MEDIUM = 'medium';
+
+
 	/**
 	 * @var string
 	 */
-	protected $key = 'follow';
+	protected $key = 'filter_level';
 }

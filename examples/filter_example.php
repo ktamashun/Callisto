@@ -10,10 +10,25 @@ $stream = new \Callisto\Stream\Filter($oauth);
 $stream->setLogger($logger);
 $stream->setRequestParameters(
 	[
+		// Track custom phrases
 		new Callisto\RequestParameter\Track(['twitter']),
+
+		// Filter Tweets by language
 		new Callisto\RequestParameter\Language(['en', 'de']),
-		//new Callisto\Filter\Follow(['123456789', '987654321']),
-		//new Callisto\Filter\Location(10.1101, 12.001, 30.223, 35.443),
+
+		// Filter tweets from New York or San Francisco
+		new Callisto\RequestParameter\Location(
+			[
+				[-74, 40, -73, 41],
+				[-122.75, 36.8, -121.75, 37.8],
+			]
+		),
+
+		// Follow specific users
+		//new Callisto\RequestParameter\Follow(['123456789', '987654321']),
+
+		// Set filter level for the stream
+		//new Callisto\RequestParameter\FilterLevel(Callisto\RequestParameter\FilterLevel::LOW)
 	]
 );
 

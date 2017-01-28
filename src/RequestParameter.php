@@ -48,6 +48,10 @@ abstract class RequestParameter
 	 */
 	public function getValue() : string
 	{
-		return implode(',', $this->value);
+		if (is_array($this->value)) {
+			return implode(',', $this->value);
+		}
+
+		return $this->value;
 	}
 }
