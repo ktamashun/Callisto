@@ -14,6 +14,21 @@ use Psr\Log\AbstractLogger;
 class Logger extends AbstractLogger
 {
 	/**
+	 * @var resource
+	 */
+	protected $handler;
+
+
+	/**
+	 * Logger constructor.
+	 * @param resource $handler
+	 */
+	public function __construct($handler)
+	{
+		$this->handler = $handler;
+	}
+
+	/**
 	 * Logs with an arbitrary level.
 	 *
 	 * @param mixed $level
@@ -33,8 +48,9 @@ class Logger extends AbstractLogger
 		}, $context);
 
 		$dateTime = new \DateTime();
-		$contextStr = ' ["' . implode('","', $context) . ']"';
+		$contextStr = empty($context) ? '' : ' ["' . implode('","', $context) . '"]';
 
-		echo '[' . $dateTime->format('Y-m-d H:i:s') . '] Callisto.' . $level . ': ' . $message . $contextStr . PHP_EOL;
+		$msg = '[' . $dateTime->format('Y-m-d H:i:s') . '] Callisto.' . $level . ': ' . $message . $contextStr . PHP_EOL;
+		fwrite($this->handler, $msg, strlen($msg));
 	}
 }
