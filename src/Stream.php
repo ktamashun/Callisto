@@ -229,10 +229,12 @@ class Stream extends Psr7Stream
 			$status .= $chunk;
 
 			if ("\r\n" == substr($chunk, $chunkSize - 2, 2)) {
+				echo "hello-%%%%%//////////////////////////";
 				if ($this->isMessage($status)) {
 					$this->handleMessage($status);
 				} else {
 					yield $status;
+					$this->readLine();
 				}
 
 				$status = '';

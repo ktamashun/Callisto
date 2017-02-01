@@ -2,3 +2,4 @@
 /.idea
 /examples/*.log
 /examples/env.local.php
+/tests/stream_logs_copy
