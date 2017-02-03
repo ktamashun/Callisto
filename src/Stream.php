@@ -221,20 +221,18 @@ class Stream extends Psr7Stream
 		while (!$this->eof()) {
 			$chunkSize = $this->readNextChunkSize();
 
-			if (2 == $chunkSize) {
+			if (2 == $chunkSize || 0 == $chunkSize) {
 				continue;
 			}
 
 			$chunk = $this->readChunk($chunkSize);
 			$status .= $chunk;
 
-			if ("\r\n" == substr($chunk, $chunkSize - 2, 2)) {
-				echo "hello-%%%%%//////////////////////////";
+			if ("\r\n" == substr($chunk, $chunkSize - 2, 2) || $this->eof()) {
 				if ($this->isMessage($status)) {
 					$this->handleMessage($status);
 				} else {
 					yield $status;
-					$this->readLine();
 				}
 
 				$status = '';

@@ -17,12 +17,8 @@ function fread($handle, $length)
 {
 	$str = \fread($handle, $length);
 
-	if ("\n" == substr($str, $length - 1, 1)) {
-		echo "switched".PHP_EOL;
-
-		$str = substr($str, 0, $length - 1) . "\r\n";
-		echo $str;
-		//$str = str_replace("\n", "\r\n", $str);
+	if ("\n\n" == substr($str, $length - 2, 2)) {
+		$str = substr($str, 0, $length - 2) . "\r\n";
 	}
 
 	return $str;
