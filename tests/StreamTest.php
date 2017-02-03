@@ -8,11 +8,26 @@ use PHPUnit\Framework\TestCase;
 fclose($r);
 die();*/
 
+/**
+ * Overwrite PHP's built in function to read the test stream.
+ *
+ * @param $url
+ * @param $port
+ * @return resource
+ */
 function fsockopen($url, $port)
 {
 	return fopen(__DIR__ . '/stream_logs/' . StreamTest::$callistoTestStreamLog, 'r');
 }
 
+/**
+ * Git won't allow to store \r\n line endings, but the stream has them,
+ * so we need to switch the \n\n endings in the test file.
+ *
+ * @param $handle
+ * @param $length
+ * @return string
+ */
 function fread($handle, $length)
 {
 	$str = \fread($handle, $length);
@@ -24,6 +39,14 @@ function fread($handle, $length)
 	return $str;
 }
 
+/**
+ * We will not have to write into the test stream.
+ *
+ * @param $res
+ * @param $str
+ * @param $len
+ * @return bool
+ */
 function fwrite($res, $str, $len)
 {
 	return true;
