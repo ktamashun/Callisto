@@ -4,6 +4,7 @@
 [![Software License][ico-license]](LICENSE.md)
 [![Coverage Status][ico-scrutinizer]][link-scrutinizer]
 [![Quality Score][ico-code-quality]][link-code-quality]
+[![Build status][ico-build-status]][link-build-status]
 [![Total Downloads][ico-downloads]][link-downloads]
 
 **PHP library for Twitter Streaming API.**
@@ -41,9 +42,11 @@ The MIT License (MIT). Please see the License File for more information.
 [ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/ktamashun/callisto.svg
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/ktamashun/callisto.svg
 [ico-downloads]: https://img.shields.io/packagist/dt/ktamashun/callisto.svg
+[ico-build-status]: https://scrutinizer-ci.com/g/ktamashun/callisto/badges/build.png?b=master
 
 [link-packagist]: https://packagist.org/packages/ktamashun/callisto
 [link-scrutinizer]: https://scrutinizer-ci.com/g/ktamashun/callisto/code-structure
 [link-code-quality]: https://scrutinizer-ci.com/g/ktamashun/callisto
 [link-downloads]: https://packagist.org/packages/ktamashun/callisto
+[link-buid-status]: https://scrutinizer-ci.com/g/ktamashun/callisto/build-status/master
 [link-author]: https://github.com/ktamashun
