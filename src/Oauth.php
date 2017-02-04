@@ -65,7 +65,7 @@ class Oauth
 	{
 		return [
 			'oauth_consumer_key' => $this->consumerKey,
-			'oauth_nonce' => md5(mktime().rand()),
+			'oauth_nonce' => md5(mktime() . rand()),
 			'oauth_signature_method' => 'HMAC-SHA1',
 			'oauth_timestamp' => mktime(),
 			'oauth_token' => $this->accessToken,
@@ -99,13 +99,13 @@ class Oauth
 		."Connection: close\r\n"
 		."User-Agent: Callisto API\r\n"
 		."Content-Type: application/x-www-form-urlencoded\r\n"
-		."Authorization: OAuth realm=\"\",oauth_consumer_key=\"".$signatureParams['oauth_consumer_key']."\","
-		."oauth_nonce=\"".$signatureParams['oauth_nonce']."\","
-		."oauth_signature_method=\"".$signatureParams['oauth_signature_method']."\","
-		."oauth_timestamp=\"".$signatureParams['oauth_timestamp']."\","
-		."oauth_version=\"".$signatureParams['oauth_version']."\","
-		."oauth_token=\"".$signatureParams['oauth_token']."\","
-		."oauth_signature=\"".rawurlencode($signatureParams['oauth_signature'])."\"\r\n"
+		."Authorization: OAuth realm=\"\",oauth_consumer_key=\"" . $signatureParams['oauth_consumer_key'] . "\","
+		."oauth_nonce=\"" . $signatureParams['oauth_nonce'] . "\","
+		."oauth_signature_method=\"" . $signatureParams['oauth_signature_method'] . "\","
+		."oauth_timestamp=\"" . $signatureParams['oauth_timestamp'] . "\","
+		."oauth_version=\"" . $signatureParams['oauth_version'] . "\","
+		."oauth_token=\"" . $signatureParams['oauth_token'] . "\","
+		."oauth_signature=\"" . rawurlencode($signatureParams['oauth_signature']) . "\"\r\n"
 		."Content-Length: " . strlen($content) . "\r\n"
 		."Host: stream.twitter.com:443\r\n\r\n"
 		.$content;
