@@ -4,7 +4,7 @@
 [![Software License][ico-license]](LICENSE.md)
 [![Coverage Status][ico-scrutinizer]][link-scrutinizer]
 [![Quality Score][ico-code-quality]][link-code-quality]
-[![Build status][ico-build-status]][link-build-status]
+[![Build Status](https://scrutinizer-ci.com/g/ktamashun/callisto/badges/build.png?b=master)](https://scrutinizer-ci.com/g/ktamashun/callisto/build-status/master)
 [![Total Downloads][ico-downloads]][link-downloads]
 
 **PHP library for Twitter Streaming API.**
