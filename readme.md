@@ -27,6 +27,7 @@ This library follows [SemVer v2.0.0.](http://semver.org/)
 ## Testing
 
 The library is tested using PHPUnit. You can run the test like:
+
 `$ ./vendor/phpunit/phpunit`
 
 ## Credits
