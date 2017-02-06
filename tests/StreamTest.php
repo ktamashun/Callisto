@@ -3,11 +3,6 @@
 namespace Callisto;
 use PHPUnit\Framework\TestCase;
 
-/*$r = fopen(__DIR__ . '/stream_logs/fast.log', 'a');
-\fwrite($r, "\r\n");
-fclose($r);
-die();*/
-
 /**
  * Overwrite PHP's built in function to read the test stream.
  *
