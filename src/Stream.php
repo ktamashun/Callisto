@@ -96,13 +96,24 @@ class Stream extends Psr7Stream
 			$response[] = $line;
 		}
 
-		preg_match('/^HTTP\/1\.1 ([0-9]{3}).*$/', $response[0], $matches);
-		if (200 !== (int)$matches[1]) {
-			$this->logger->critical('Connection error', [$response[0]]);
-			throw new \Exception('Connection error: ' . $response[0]);
-		}
+		$this->checkResponseStatusCode($response[0]);
 
 		$this->logger->info('Connection successful.', $response);
+	}
+
+	/**
+	 * Checks the HTTP response code recieved from the server.
+	 *
+	 * @param string $response
+	 * @throws \Exception If the response code different than 200.
+	 */
+	protected function checkResponseStatusCode($response)
+	{
+		preg_match('/^HTTP\/1\.1 ([0-9]{3}).*$/', $response, $matches);
+		if (200 !== (int)$matches[1]) {
+			$this->logger->critical('Connection error', [$response]);
+			throw new \Exception('Connection error: ' . $response);
+		}
 	}
 
 	/**
@@ -221,14 +232,14 @@ class Stream extends Psr7Stream
 		while (!$this->eof()) {
 			$chunkSize = $this->readNextChunkSize();
 
-			if (2 == $chunkSize || 0 == $chunkSize) {
+			if ($this->isEmptyChunk($chunkSize)) {
 				continue;
 			}
 
 			$chunk = $this->readChunk($chunkSize);
 			$status .= $chunk;
 
-			if ("\r\n" == substr($chunk, $chunkSize - 2, 2) || $this->eof()) {
+			if ($this->shouldChunkBeHandled($chunk, $chunkSize)) {
 				if ($this->isMessage($status)) {
 					$this->handleMessage($status);
 				} else {
@@ -238,5 +249,28 @@ class Stream extends Psr7Stream
 				$status = '';
 			}
 		}
+	}
+
+	/**
+	 * Decides weather the read chunk is the end of a complete json object.
+	 *
+	 * @param string $chunk
+	 * @param int $chunkSize
+	 * @return bool
+	 */
+	protected function shouldChunkBeHandled($chunk, $chunkSize)
+	{
+		return "\r\n" == substr($chunk, $chunkSize - 2, 2) || $this->eof();
+	}
+
+	/**
+	 * Decides weather the read chunk is empty or not.
+	 *
+	 * @param int $chunkSize
+	 * @return bool
+	 */
+	protected function isEmptyChunk($chunkSize)
+	{
+		return 2 == $chunkSize || 0 == $chunkSize;
 	}
 }
