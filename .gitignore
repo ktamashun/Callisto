@@ -3,3 +3,5 @@
 /examples/*.log
 /examples/env.local.php
 /tests/stream_logs_copy
+/htmlcoverage
+/clover-coverage.xml
