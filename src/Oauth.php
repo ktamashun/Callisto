@@ -65,9 +65,9 @@ class Oauth
 	{
 		return [
 			'oauth_consumer_key' => $this->consumerKey,
-			'oauth_nonce' => md5(mktime() . rand()),
+			'oauth_nonce' => md5(time() . rand()),
 			'oauth_signature_method' => 'HMAC-SHA1',
-			'oauth_timestamp' => mktime(),
+			'oauth_timestamp' => time(),
 			'oauth_token' => $this->accessToken,
 			'oauth_version' => '1.0',
 		];
