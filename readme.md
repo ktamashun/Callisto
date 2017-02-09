@@ -14,11 +14,33 @@ https://dev.twitter.com/streaming/overview
 
 ## Install
 
-`composer require ktamashun/callisto`
+The esiest way to install Callisto is using composer
+
+`$ composer require ktamashun/callisto`
 
 ## Usage
 
-Examples can be found in the `examples` directory.
+### Create a Twitter app
+
+First go to https://apps.twitter.com/ and create a new Twitter app. To authenticate to the Twitter Streaming API you are going to need a `CONSUMER_KEY`, `CONSUMER_SECRET`, `ACCESS_TOKEN`, `ACCESS_TOKEN_SECRET`. These can be found on the Keys and access tokens tab within your application.
+
+### Running the examples
+
+The examples can be found in the `examples` directory.
+
+The directory contains a sample config file: `env.sample.php`. Use this to create a local one: `env.local.php` and fill in the `CONSUMER_KEY`, `CONSUMER_SECRET`, `ACCESS_TOKEN`, `ACCESS_TOKEN_SECRET` constants with your applications.
+
+### Using the filter stream
+
+There are five type of filters in the `\Callisto\RequestParameters` namespace.
+
+* `FilterLevel`: This can be used to filter out tweets that would not be appropriate during a presentation.
+* `Follow`: You can use this parameter follow the activity of certain users.
+* `Language`: Filter tweets that were written in one or more given languages.
+* `Location`: Filter tweets that were written in a certain geographic area. Please read carefully Twitter's documentation about location filtering.
+* `Track`: You can track specific words.
+
+You can read about fiiter parameters in detail in the [Twitter API documentation](https://dev.twitter.com/streaming/overview/request-parameters).
 
 ## Versioning
 
