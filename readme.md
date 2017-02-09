@@ -30,6 +30,10 @@ The examples can be found in the `examples` directory.
 
 The directory contains a sample config file: `env.sample.php`. Use this to create a local one: `env.local.php` and fill in the `CONSUMER_KEY`, `CONSUMER_SECRET`, `ACCESS_TOKEN`, `ACCESS_TOKEN_SECRET` constants with your applications.
 
+The esiest way to run the examples is to use a [Docker](https://www.docker.com/) container:
+
+`$ docker run -it --rm -v $(pwd):/www/ -w /www/examples php:7.1-alpine php filter_example.php`
+
 ### Using the filter stream
 
 There are five type of filters in the `\Callisto\RequestParameters` namespace.
