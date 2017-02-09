@@ -47,7 +47,6 @@ Example usage:
 ```php
 $oauth = new \Callisto\Oauth(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET);
 $stream = new \Callisto\Stream\Filter($oauth);
-$stream->setLogger($logger);
 $stream->setRequestParameters(
 	[
 		// Track custom phrases
