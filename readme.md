@@ -10,7 +10,7 @@
 **PHP library for Twitter Streaming API.**
 
 Twitteer Streaming API documentation:
-https://dev.twitter.com/streaming/overview
+[https://dev.twitter.com/streaming/overview](https://dev.twitter.com/streaming/overview)
 
 ## Install
 
@@ -22,7 +22,7 @@ The esiest way to install Callisto is using composer
 
 ### Create a Twitter app
 
-First go to https://apps.twitter.com/ and create a new Twitter app. To authenticate to the Twitter Streaming API you will need a `CONSUMER_KEY`, `CONSUMER_SECRET`, `ACCESS_TOKEN` and an `ACCESS_TOKEN_SECRET`. These can be found on the Keys and access tokens tab within your application.
+First go to [https://apps.twitter.com/](https://apps.twitter.com/) and create a new Twitter app. To authenticate to the Twitter Streaming API you will need a `CONSUMER_KEY`, `CONSUMER_SECRET`, `ACCESS_TOKEN` and an `ACCESS_TOKEN_SECRET`. These can be found on the Keys and access tokens tab within your application.
 
 ### Running the examples
 
