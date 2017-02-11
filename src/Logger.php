@@ -33,22 +33,22 @@ class Logger extends AbstractLogger
 	 *
 	 * @param mixed $level
 	 * @param string $message
-	 * @param array $logContext
+	 * @param array $loggedParameters
 	 *
 	 * @return void
 	 */
-	public function log($level, $message, array $logContext = array())
+	public function log($level, $message, array $loggedParameters = array())
 	{
-		$logContext = array_map(function($logContextRow) {
-			if (is_object($logContextRow)) {
-				$logContextRow = json_encode($logContextRow);
+		$loggedParameters = array_map(function($loggedParameter) {
+			if (is_object($loggedParameter)) {
+				$loggedParameter = json_encode($loggedParameter);
 			}
 
-			return str_replace("\n", ' ', $logContextRow);
-		}, $logContext);
+			return str_replace("\n", ' ', $loggedParameter);
+		}, $loggedParameters);
 
 		$dateTime = new \DateTime();
-		$contextStr = empty($logContext) ? '' : ' ["' . implode('","', $logContext) . '"]';
+		$contextStr = empty($loggedParameters) ? '' : ' ["' . implode('","', $loggedParameters) . '"]';
 
 		$msg = '[' . $dateTime->format('Y-m-d H:i:s') . '] Callisto.' . $level . ': ' . $message . $contextStr . PHP_EOL;
 		fwrite($this->handler, $msg, strlen($msg));
