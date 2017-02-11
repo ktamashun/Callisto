@@ -158,7 +158,7 @@ class Stream extends Psr7Stream
 	}
 
 	/**
-	 * Determines if the received json is message from twitter.
+	 * Determines if the received json is a message from twitter.
 	 *
 	 * @param string $status
 	 * @return bool
@@ -166,6 +166,7 @@ class Stream extends Psr7Stream
 	private function isMessage(string $status) : bool
 	{
 		$testStr = substr($status, 0, 14);
+		return !('{"created_at":' == $testStr);
 		if ('{"created_at":' == $testStr) {
 			return false;
 		}
