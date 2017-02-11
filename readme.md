@@ -22,15 +22,15 @@ The esiest way to install Callisto is using composer
 
 ### Create a Twitter app
 
-First go to https://apps.twitter.com/ and create a new Twitter app. To authenticate to the Twitter Streaming API you are going to need a `CONSUMER_KEY`, `CONSUMER_SECRET`, `ACCESS_TOKEN`, `ACCESS_TOKEN_SECRET`. These can be found on the Keys and access tokens tab within your application.
+First go to https://apps.twitter.com/ and create a new Twitter app. To authenticate to the Twitter Streaming API you will need a `CONSUMER_KEY`, `CONSUMER_SECRET`, `ACCESS_TOKEN` and an `ACCESS_TOKEN_SECRET`. These can be found on the Keys and access tokens tab within your application.
 
 ### Running the examples
 
 The examples can be found in the `examples` directory.
 
-The directory contains a sample config file: `env.sample.php`. Use this to create a local one: `env.local.php` and fill in the `CONSUMER_KEY`, `CONSUMER_SECRET`, `ACCESS_TOKEN`, `ACCESS_TOKEN_SECRET` constants with your applications.
+The directory contains a sample config file: `env.sample.php`. Use this to create a local one called `env.local.php` and fill in the `CONSUMER_KEY`, `CONSUMER_SECRET`, `ACCESS_TOKEN` and `ACCESS_TOKEN_SECRET` constants with the ones from your application.
 
-The esiest way to run the examples is to use a [Docker](https://www.docker.com/) container:
+The esiest way to run the examples is to use a [Docker](https://www.docker.com/) container. Run this command from the project's root directory:
 
 `$ docker run -it --rm -v $(pwd):/www/ -w /www/examples php:7.1-alpine php filter_example.php`
 
@@ -38,7 +38,7 @@ The esiest way to run the examples is to use a [Docker](https://www.docker.com/)
 
 There are five type of filters in the `\Callisto\RequestParameters` namespace.
 
-* `FilterLevel`: This can be used to filter out tweets that would not be appropriate during a presentation.
+* `FilterLevel`: This can be used to filter out tweets that for example would not be appropriate during a presentation.
 * `Follow`: You can use this parameter follow the activity of certain users.
 * `Language`: Filter tweets that were written in one or more given languages.
 * `Location`: Filter tweets that were written in a certain geographic area. Please read carefully Twitter's documentation about location filtering.
