@@ -44,11 +44,11 @@ function fread($handle, $length)
  * @param $str
  * @param $len
  * @return bool
- */
+ *
 function fwrite($res, $str, $len)
 {
 	return true;
-}
+}*/
 
 /**
  * Created by PhpStorm.

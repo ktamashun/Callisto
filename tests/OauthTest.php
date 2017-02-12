@@ -3,10 +3,21 @@
 namespace Callisto;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * We need the time function to always return the same value.
+ *
+ * @return int
+ */
 function time()
 {
 	return 1;
 }
+
+/**
+ * We need the rand function to always return the same value.
+ *
+ * @return int
+ */
 function rand()
 {
 	return 2;

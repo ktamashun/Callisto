@@ -10,4 +10,5 @@ namespace Callisto\Exception;
 
 
 class CallistoException extends \Exception
-{}
+{
+}
