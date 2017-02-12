@@ -12,7 +12,7 @@ namespace Callisto;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
-class Stream extends Psr7Stream
+abstract class Stream extends Psr7Stream
 {
 	/**
 	 * Streaming API base URL.
@@ -105,14 +105,14 @@ class Stream extends Psr7Stream
 	 * Checks the HTTP response code recieved from the server.
 	 *
 	 * @param string $response
-	 * @throws \Exception If the response code different than 200.
+	 * @throws Exception\ConnectionException If the response code different than 200.
 	 */
 	protected function checkResponseStatusCode($response)
 	{
 		preg_match('/^HTTP\/1\.1 ([0-9]{3}).*$/', $response, $matches);
 		if (200 !== (int)$matches[1]) {
 			$this->logger->critical('Connection error', [$response]);
-			throw new \Exception('Connection error: ' . $response);
+			throw new Exception\ConnectionException('Connection error: ' . $response);
 		}
 	}
 
@@ -151,7 +151,7 @@ class Stream extends Psr7Stream
 	 *
 	 * @param string $messageJson
 	 */
-	private function handleMessage(string $messageJson) : void
+	protected function handleMessage(string $messageJson) : void
 	{
 		$message = json_decode($messageJson);
 		$this->logger->info('Message received', [$message]);
@@ -200,7 +200,7 @@ class Stream extends Psr7Stream
 	 * Reads the size of the next chunk from the stream.
 	 *
 	 * @return int
-	 * @throws \Exception
+	 * @throws Exception\ConnectionClosedException
 	 */
 	protected function readNextChunkSize() : int
 	{
@@ -214,7 +214,7 @@ class Stream extends Psr7Stream
 		}
 
 		$this->logger->error('Connection closed.');
-		throw new \Exception('Connection closed.');
+		throw new Exception\ConnectionClosedException('Connection closed.');
 	}
 
 	/**
@@ -239,7 +239,7 @@ class Stream extends Psr7Stream
 			$chunk = $this->readChunk($chunkSize);
 			$status .= $chunk;
 
-			if ($this->shouldChunkBeHandled($chunk, $chunkSize)) {
+			if ($this->isJsonFinished($chunk, $chunkSize)) {
 				if ($this->isMessage($status)) {
 					$this->handleMessage($status);
 				} else {
@@ -258,7 +258,7 @@ class Stream extends Psr7Stream
 	 * @param int $chunkSize
 	 * @return bool
 	 */
-	protected function shouldChunkBeHandled($chunk, $chunkSize)
+	protected function isJsonFinished($chunk, $chunkSize)
 	{
 		return "\r\n" == substr($chunk, $chunkSize - 2, 2) || $this->eof();
 	}
