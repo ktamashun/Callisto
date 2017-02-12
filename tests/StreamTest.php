@@ -5,7 +5,6 @@ use Callisto\RequestParameter\Language;
 use Callisto\RequestParameter\Track;
 use Callisto\Stream\Filter;
 use PHPUnit\Framework\TestCase;
-use SebastianBergmann\CodeCoverage\RuntimeException;
 
 /**
  * Overwrite PHP's built in function to read the test stream.
