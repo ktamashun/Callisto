@@ -19,3 +19,5 @@ $stream->connect();
 while (!$stream->eof()) {
 	echo $stream->read(2048);
 }
+
+$stream->close();

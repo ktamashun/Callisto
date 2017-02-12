@@ -36,3 +36,5 @@ foreach ($stream->readStream() as $jsonStatus) {
 	$status = json_decode($jsonStatus);
 	$logger->info('New status: ' . $status->id, [$status->text]);
 }
+
+$stream->close();
