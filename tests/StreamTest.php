@@ -5,6 +5,7 @@ use Callisto\RequestParameter\Language;
 use Callisto\RequestParameter\Track;
 use Callisto\Stream\Filter;
 use PHPUnit\Framework\TestCase;
+use SebastianBergmann\CodeCoverage\RuntimeException;
 
 /**
  * Overwrite PHP's built in function to read the test stream.
@@ -37,18 +38,6 @@ function fread($handle, $length)
 	return $str;
 }
 
-/**
- * We will not have to write into the test stream.
- *
- * @param $res
- * @param $str
- * @param $len
- * @return bool
- *
-function fwrite($res, $str, $len)
-{
-	return true;
-}*/
 
 /**
  * Created by PhpStorm.
@@ -124,6 +113,29 @@ class StreamTest extends TestCase
 			);
 
 		$this->stream->connect();
+		$this->stream->connect();
+	}
+
+	public function testDetach()
+	{
+		self::$callistoTestStreamLog = 'test.log';
+
+		$this->oauth->expects($this->exactly(2))
+			->method('getOauthRequest')
+			->with(['stall_warnings' => 'true'], 'POST', Stream::BASE_URL, '/1.1/statuses/filter.json')
+			->willReturn('');
+
+		$this->logger->expects($this->exactly(4))
+			->method('info')
+			->withConsecutive(
+				['Opening new connection.'],
+				['Connection successful.'],
+				['Opening new connection.'],
+				['Connection successful.']
+			);
+
+		$this->stream->connect();
+		$this->stream->detach();
 		$this->stream->connect();
 	}
 
@@ -234,5 +246,56 @@ class StreamTest extends TestCase
 			[$track, $language]
 		);
 		$this->stream->connect();
+	}
+
+	public function testGetSize()
+	{
+		$this->expectException(\RuntimeException::class);
+		$this->stream->getSize();
+	}
+
+	public function testTell()
+	{
+		$this->expectException(\RuntimeException::class);
+		$this->stream->tell();
+	}
+
+	public function testSeek()
+	{
+		$this->expectException(\RuntimeException::class);
+		$this->stream->seek(1);
+	}
+
+	public function testRewind()
+	{
+		$this->expectException(\RuntimeException::class);
+		$this->stream->rewind();
+	}
+
+	public function testGetContents()
+	{
+		$this->expectException(\RuntimeException::class);
+		$this->stream->getContents();
+	}
+
+	public function testIsWitable()
+	{
+		$this->assertTrue($this->stream->isWritable());
+	}
+
+	public function testIsReadable()
+	{
+		$this->assertTrue($this->stream->isReadable());
+	}
+
+	public function testIsSeekable()
+	{
+		$this->assertFalse($this->stream->isSeekable());
+	}
+
+	public function testGetMetadata()
+	{
+		$this->stream->connect();
+		$this->assertTrue(is_array($this->stream->getMetadata()));
 	}
 }

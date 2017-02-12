@@ -249,6 +249,8 @@ abstract class Stream extends Psr7Stream
 				$status = '';
 			}
 		}
+
+		$this->close();
 	}
 
 	/**
