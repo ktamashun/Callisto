@@ -247,6 +247,12 @@ class StreamTest extends TestCase
 		$this->stream->connect();
 	}
 
+	public function testToString()
+	{
+		$this->expectException(\RuntimeException::class);
+		$this->stream->__toString();
+	}
+
 	public function testGetSize()
 	{
 		$this->expectException(\RuntimeException::class);
