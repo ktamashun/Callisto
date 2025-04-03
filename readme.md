@@ -14,7 +14,7 @@ Twitteer Streaming API documentation:
 
 ## Install
 
-The esiest way to install Callisto is using composer
+The esiest way to install Callisto is using composer.
 
 `$ composer require ktamashun/callisto`
 
